@@ -22,9 +22,9 @@ const Login = (props) => {
               Password Confirmation:
               <input type="password" name="passwordConfirmation" />
             </label>
-            <input type="submit" value="Submit" />
           </>
         }
+        <input type="submit" value="Submit" />
       </form>
       <br/>
       <br/>
