@@ -13,3 +13,17 @@ export const setRestaurants = () => {
     })
   )}
 }
+
+export const setSelectedRestaurant = (id) => {
+  console.log(id)
+  return dispatch => {
+    fetch(API + "/restaurants/" + id)
+    .then(res => res.json())
+    .then(restaurant => dispatch({
+      type: "SET_SELECTED_RESTAURANT",
+      payload: restaurant
+    })
+  )}
+}
+
+export const unsetRestaurant = () => ({type: "UNSET_RESTAURANT"})

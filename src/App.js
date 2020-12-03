@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import RestaurantCards from './containers/RestaurantCards'
+import RestaurantPage from './components/RestaurantPage'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setRestaurants } from './redux/actionCreators'
+import { Switch, Route } from 'react-router-dom'
 
 class App extends Component  {
 
@@ -15,7 +17,10 @@ class App extends Component  {
     return (
       <>
         <h1>NOURISH.EXE</h1>
-        <RestaurantCards/>
+        <Switch>
+          <Route path="/restaurants/:id" component={RestaurantPage}/>
+          <Route path="/restaurants" component={RestaurantCards}/>
+        </Switch>
       </>
     );
   }
