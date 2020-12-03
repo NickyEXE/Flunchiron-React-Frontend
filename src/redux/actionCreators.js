@@ -27,3 +27,5 @@ export const setSelectedRestaurant = (id) => {
 }
 
 export const unsetRestaurant = () => ({type: "UNSET_RESTAURANT"})
+
+export const toggleSignup = () => ({type: "TOGGLE_SIGNUP"})

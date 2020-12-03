@@ -9,12 +9,12 @@ const nullRestaurant = {
   kindOfFood: ""
 }
 
-const initialRestaurantState = {
+const initialState = {
   restaurants: [],
   selectedRestaurant: nullRestaurant
 }
 
-const restaurantsReducer = (state=initialRestaurantState, action) => {
+const restaurantsReducer = (state=initialState, action) => {
   switch (action.type){
     case "SET_RESTAURANTS":
       return {...state, restaurants: action.payload}
