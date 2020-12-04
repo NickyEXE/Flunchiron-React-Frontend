@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ReviewCard from '../components/ReviewCard'
+import ReviewForm from '../components/ReviewForm'
 import { setSelectedRestaurant, unsetRestaurant } from '../redux/actionCreators'
 
 class RestaurantPage extends Component {
@@ -16,7 +18,7 @@ class RestaurantPage extends Component {
   }
 
   renderPage = () => {
-    const { url, name, imageUrl, kindOfFood, address, history } = this.props
+    const { url, name, imageUrl, kindOfFood, address, history, reviews, id } = this.props
     return (
       <>
         <h1><a href={ url }>{ name }</a></h1>
@@ -30,6 +32,10 @@ class RestaurantPage extends Component {
           frameBorder="0" style={{border: 0}}
           src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyAofUez4t-xwk4MKMECVA2zzYzz7X9c4D8&q=${name + ", " + address}`} allowFullScreen>
         </iframe>
+        <div className="reviews">
+          {this.props.user.id && <ReviewForm restaurant_id={id}/>}
+          {reviews.map(review => <ReviewCard key={review.id}  {...review}/>)}
+        </div>
       </>
     )
   }
@@ -80,7 +86,8 @@ class RestaurantPage extends Component {
 </div> */
 
 const mapStateToProps = (state) => ({
-  ...state.restaurants.selectedRestaurant
+  ...state.restaurants.selectedRestaurant,
+  user: state.user
 })
 
 export default connect( mapStateToProps, { setSelectedRestaurant, unsetRestaurant } )(RestaurantPage)
