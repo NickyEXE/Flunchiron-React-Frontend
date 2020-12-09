@@ -7,9 +7,9 @@ export const setRestaurants = () => {
   return dispatch => {
     fetch(API + "/restaurants")
     .then(res => res.json())
-    .then(restaurants => dispatch({
+    .then(data => dispatch({
       type: "SET_RESTAURANTS",
-      payload: restaurants
+      payload: data
     })
   )}
 }
@@ -135,4 +135,13 @@ export const logout = () => {
     localStorage.clear("token")
     dispatch({type: "LOGOUT"})
   }
+}
+
+export const handleSearchFormChange = (e) => {
+  const target = e.target;
+  const value = target.type === 'checkbox' ? target.checked : target.value;
+  return ({
+    type: "FILTERS_FORM_CHANGE",
+    payload: {name: e.target.name, value: value}
+  })
 }

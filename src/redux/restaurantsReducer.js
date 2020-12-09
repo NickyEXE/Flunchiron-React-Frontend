@@ -17,14 +17,20 @@ const nullReviewForm = {
 
 const initialState = {
   restaurants: [],
+  kindsOfFood: [],
   selectedRestaurant: nullRestaurant,
-  reviewForm: nullReviewForm
+  reviewForm: nullReviewForm,
+  filtersForm: {
+    search: "",
+    filter: "",
+    alphabetical: false
+  }
 }
 
 const restaurantsReducer = (state=initialState, action) => {
   switch (action.type){
     case "SET_RESTAURANTS":
-      return {...state, restaurants: action.payload}
+      return {...state, ...action.payload}
     case "SET_SELECTED_RESTAURANT":
       return {...state, selectedRestaurant: action.payload}
     case "UNSET_RESTAURANT":
@@ -32,6 +38,13 @@ const restaurantsReducer = (state=initialState, action) => {
     case "REVIEW_FORM_CHANGE":
       return {...state, reviewForm: {
         ...state.reviewForm,
+        // if the payload's name is "content", this will update the
+        // content key in the reviewForm in state with the new payload value
+        [action.payload.name]: action.payload.value
+      }}
+    case "FILTERS_FORM_CHANGE":
+      return {...state, filtersForm: {
+        ...state.filtersForm,
         // if the payload's name is "content", this will update the
         // content key in the reviewForm in state with the new payload value
         [action.payload.name]: action.payload.value
